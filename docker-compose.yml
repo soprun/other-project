@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: other_project
+    volumes:
+      - .:/usr/src/app:rw,cached
