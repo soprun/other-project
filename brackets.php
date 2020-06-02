@@ -66,8 +66,6 @@ $pattern = [
     '{[()([<]<>>)]}' => false,
 ];
 
-echo PHP_EOL;
-
 foreach ($pattern as $input => $compare) {
     echo PHP_EOL . "'{$input}' | ";
 
