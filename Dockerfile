@@ -5,4 +5,4 @@ COPY . /usr/src/app
 # change working directory
 WORKDIR /usr/src/app
 
-CMD [ "php", "./your-script.php" ]
+CMD ["php", "./brackets.php"]
