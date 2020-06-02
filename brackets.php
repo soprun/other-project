@@ -1,49 +1,48 @@
 <?php
+declare(strict_types=1);
 
 function isValid(string $input): bool
 {
-    try {
-        static $brackets = [
-            '{' => '}',
-            '[' => ']',
-            '(' => ')',
-            '<' => '>',
-        ];
+    static $brackets = [
+        '{' => '}',
+        '[' => ']',
+        '(' => ')',
+        '<' => '>',
+    ];
 
-        $length = mb_strlen($input);
+    $data = str_split($input);
 
-        if ($length < 2) {
-            throw new Exception(
-                'An error occurred and the string length does not match the expected length.'
-            );
+    if (count($data) < 2) {
+        throw new LengthException(
+            'An error occurred and string length does not match the expected.'
+        );
+    }
+
+    $stack = new SplStack();
+
+    foreach ($data as $current => $value) {
+        if (array_key_exists($value, $brackets) === true) {
+            $stack->push($brackets[$value]);
+            continue;
         }
 
-        $stack = new SplStack();
-
-        foreach (str_split($input) as $current => $symbol) {
-            if (array_key_exists($symbol, $brackets) === true) {
-                $stack->push($brackets[$symbol]);
-                continue;
-            }
-
-            if ($stack->count() === 0) {
-                throw new RuntimeException('Validation error occurred, no open brackets.');
-            }
-
-            if ($stack->pop() !== $symbol) {
-                throw new LengthException(
-                    "An error occurred and the symbol {$current} requires a closed bracket of the same type."
-                );
-            }
-        }
-
-        if ($stack->count() > 0) {
+        if ($stack->count() === 0) {
             throw new RuntimeException(
-                "There are {$stack->count()} open brackets left."
+                "An error occurred and the character {$current} requires an open bracket."
             );
         }
-    } catch (Exception $exception) {
-        return false;
+
+        if ($stack->pop() !== $value) {
+            throw new RuntimeException(
+                "An error occurred and the character {$current} requires a closed bracket."
+            );
+        }
+    }
+
+    if ($stack->count() > 0) {
+        throw new RuntimeException(
+            'An error occurred and not all brackets are closed.'
+        );
     }
 
     return true;
@@ -70,7 +69,15 @@ $pattern = [
 echo PHP_EOL;
 
 foreach ($pattern as $input => $compare) {
-    echo "'{$input}' | ";
-    echo isValid($input) === $compare ? 'success..' : 'failure';
-    echo PHP_EOL;
+    echo PHP_EOL . "'{$input}' | ";
+
+    try {
+        if (isValid($input) !== $compare) {
+            throw new RuntimeException('lol kek xD');
+        }
+        echo 'success..';
+    } catch (Throwable $exception) {
+        echo 'failure..';
+        // echo $exception->getMessage();
+    }
 }
