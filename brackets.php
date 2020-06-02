@@ -1,10 +1,6 @@
 <?php
 
-/**
- * @param string $input
- * @return bool
- */
-function isValid($input)
+function isValid(string $input): bool
 {
     try {
         static $brackets = [
@@ -53,14 +49,28 @@ function isValid($input)
     return true;
 }
 
+$pattern = [
+    '' => false,
+    '{' => false,
+    '}' => false,
+    '}{' => false,
+    '{}' => true,
+    '{{}}' => true,
+    '{()}' => true,
+    '}(){' => false,
+    '{)(}' => false,
+    '{}.' => false,
+    '.{}.' => false,
+    '{()[]<>}' => true,
+    '{()([]<>)}' => true,
+    '{[()([]<>)]}' => true,
+    '{[()([<]<>>)]}' => false,
+];
+
 echo PHP_EOL;
 
-// false
-echo PHP_EOL . (isValid(null) ? 'True!.' : 'False!.');
-echo PHP_EOL . (isValid('{') ? 'True!.' : 'False!.');
-echo PHP_EOL . (isValid('}') ? 'True!.' : 'False!.');
-echo PHP_EOL . (isValid('}{') ? 'True!.' : 'False!.');
-
-
-// true
-echo isValid('{}') ? 'True!.' : 'False!.';
+foreach ($pattern as $input => $compare) {
+    echo "'{$input}' | ";
+    echo isValid($input) === $compare ? 'success..' : 'failure';
+    echo PHP_EOL;
+}
