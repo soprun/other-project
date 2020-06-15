@@ -16,13 +16,6 @@ final class Validator implements ValidatorInterface
         '(' => ')',
     ];
 
-    private bool $debug;
-
-    public function __construct(bool $debug = false)
-    {
-        $this->debug = $debug;
-    }
-
     public function validate(string $input): bool
     {
         try {
