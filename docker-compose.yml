@@ -10,7 +10,7 @@ services:
     build:
       dockerfile: ./docker/Dockerfile
       context: .
-      target: build
+      target: dev
     container_name: app
     volumes:
       - .:/usr/src/app:rw,cached
