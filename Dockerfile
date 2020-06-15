@@ -1,4 +1,4 @@
-FROM php:7.4-cli
+FROM php:7.4-fpm
 
 # installation system packages
 RUN apt-get update && apt-get install -y \
@@ -42,5 +42,4 @@ RUN composer dump-autoload --no-scripts --no-dev --optimize
 EXPOSE 9000
 
 # run application
-# CMD ["php-fpm", "--nodaemonize"]
-CMD ["php", "./bin/script.php"]
+CMD ["php-fpm", "--nodaemonize"]
