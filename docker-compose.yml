@@ -1,16 +1,12 @@
 version: "3.7"
 
-x-common:
-  &default-common
-  restart: always
-
 services:
   app:
-    <<: *default-common
     build:
-      dockerfile: ./docker/Dockerfile
+      dockerfile: ./docker/php/Dockerfile
       context: .
       target: dev
     container_name: app
+    restart: always
     volumes:
       - .:/usr/src/app:rw,cached
