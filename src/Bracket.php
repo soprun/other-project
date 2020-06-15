@@ -14,12 +14,6 @@ final class Bracket
         '[' => ']',
         '(' => ')',
     ];
-    protected bool $debug;
-
-    public function __construct(bool $debug = false)
-    {
-        $this->debug = $debug;
-    }
 
     public function isValid(string $input): bool
     {
@@ -40,9 +34,8 @@ final class Bracket
         $stack = new SplStack();
 
         foreach ($data as $current => $character) {
-            if ($this->isOpen($character) === true) {
-                $closed = $this->getClosed($character);
-                $stack->push($closed);
+            if (array_key_exists($character, self::$brackets) === true) {
+                $stack->push(self::$brackets[$character]);
                 continue;
             }
 
@@ -68,13 +61,13 @@ final class Bracket
         return true;
     }
 
-    protected function isOpen(string $input): bool
+    /**
+     * @param string $input
+     * @return bool
+     * @deprecated
+     */
+    protected static function isOpen(string $input): bool
     {
         return array_key_exists($input, self::$brackets) === true;
-    }
-
-    protected function getClosed(string $input): string
-    {
-        return self::$brackets[$input];
     }
 }

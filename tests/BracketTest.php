@@ -55,7 +55,7 @@ final class BracketTest extends TestCase
             echo $exception->getMessage();
         }
 
-        static::assertSame($check, $compare);
+        static::assertSame($check, $compare, $input);
     }
 
     protected function setUp(): void
