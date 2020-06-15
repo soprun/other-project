@@ -6,6 +6,5 @@ services:
       dockerfile: ./docker/php/Dockerfile
       context: .
     container_name: app
-    restart: always
     volumes:
       - .:/var/app:rw,cached
