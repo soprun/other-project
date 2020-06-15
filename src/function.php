@@ -6,17 +6,17 @@ namespace App;
 use InvalidArgumentException;
 use RuntimeException;
 use SplStack;
+use Throwable;
 
-final class Bracket
+function isValid(string $input): bool
 {
-    private static array $brackets = [
+    static $brackets = [
         '{' => '}',
         '[' => ']',
         '(' => ')',
     ];
 
-    public static function isValid(string $input): bool
-    {
+    try {
         if (empty($input) === true) {
             throw new InvalidArgumentException(
                 'An error occurred and the string cannot be empty.'
@@ -34,20 +34,20 @@ final class Bracket
         $stack = new SplStack();
 
         foreach ($data as $character) {
-            if (array_key_exists($character, self::$brackets) === true) {
-                $stack->push(self::$brackets[$character]);
+            if (array_key_exists($character, $brackets) === true) {
+                $stack->push($brackets[$character]);
                 continue;
             }
 
             if ($stack->count() === 0) {
                 throw new RuntimeException(
-                    "An error occurred and requires an open bracket."
+                    'An error occurred and requires an open bracket.'
                 );
             }
 
             if ($stack->pop() !== $character) {
                 throw new RuntimeException(
-                    "An error occurred and requires a closed bracket."
+                    'An error occurred and requires a closed bracket.'
                 );
             }
         }
@@ -59,5 +59,7 @@ final class Bracket
         }
 
         return true;
+    } catch (Throwable $exception) {
+        return false;
     }
 }
