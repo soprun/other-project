@@ -5,6 +5,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: .
-    restart: unless-stopped
+      target: app
+    restart: on-failure
     volumes:
       - .:/usr/src/app:rw,cached
