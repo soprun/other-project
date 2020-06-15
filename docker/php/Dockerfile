@@ -44,7 +44,7 @@ RUN pecl install xdebug-2.8.1 \
 
 ### Install application dependencies
 RUN set -xe \
-  && composer install --no-interaction --no-progress --optimize-autoloader --ansi
+  && composer install --no-interaction --prefer-source --no-progress --optimize-autoloader --ansi
 
 #### Build: Production
 #FROM build AS prod
@@ -56,4 +56,4 @@ RUN set -xe \
 #RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 #
 ### Remove dev dependencies
-#RUN composer install --no-dev --no-interaction --no-progress --optimize-autoloader --ansi --ignore-platform-reqs
+#RUN composer install --no-dev --no-interaction --prefer-source --no-progress --optimize-autoloader --ansi --ignore-platform-reqs

@@ -9,4 +9,4 @@ services:
     container_name: app
     restart: always
     volumes:
-      - .:/usr/src/app:rw,cached
+      - .:/usr/src/app:rw
