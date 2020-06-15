@@ -8,22 +8,26 @@ use PHPUnit\Framework\TestCase;
 
 class ValidatorTest extends TestCase
 {
-    protected Validator $instance;
-
-    public function testValidateInstanceOf(): void
+    /**
+     * @param string $input
+     * @param bool $expect
+     * @dataProvider validateDataProvider
+     */
+    public function testValidate(string $input, bool $expect): void
     {
-        static::assertTrue(true);
+        $instance = new Validator();
+
+        static::assertSame(
+            $expect,
+            $instance->validate($input),
+            (string)printf('Failed asserting that "%s" matches expected true.', $input)
+        );
     }
 
-    public function testCannotBeEmptyString(): void
+    public function validateDataProvider(): array
     {
-        static::assertTrue(true);
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->instance = new Validator();
+        return [
+            'sad' => ['{}', true]
+        ];
     }
 }

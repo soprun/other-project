@@ -3,9 +3,9 @@ version: "3.7"
 services:
   app:
     build:
-      dockerfile: ./Dockerfile
+      dockerfile: ./docker/php/Dockerfile
       context: .
     container_name: app
     restart: always
     volumes:
-      - .:/usr/src/app:rw
+      - .:/var/app:rw,cached
