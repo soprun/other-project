@@ -1,14 +1,13 @@
 # Misc
 .idea/
 .git/
+vendor/
+tests/
 
 # Files
 .DS_Store
 .editorconfig
 .gitignore
 .dockerignore
-
-# App
-vendor/
 
 README.md

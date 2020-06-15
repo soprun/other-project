@@ -3,9 +3,8 @@ version: "3.7"
 services:
   app:
     build:
-      dockerfile: ./docker/php/Dockerfile
+      dockerfile: ./Dockerfile
       context: .
-      target: dev
     container_name: app
     restart: always
     volumes:

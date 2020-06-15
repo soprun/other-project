@@ -1,4 +1,10 @@
-.idea/
-.DS_Store
+# Misc
 
+.idea/
+.git/
+
+# App
 vendor/
+
+# Files
+.DS_Store

@@ -24,6 +24,11 @@ $pattern = [
     '{[()([]<>)]}' => false,
 ];
 
-foreach ($pattern as $rule => $compare) {
-    var_dump(isValid($rule) === $compare);
+# Pattern
+# The rule.
+# .
+
+foreach ($pattern as $rule => $comparison) {
+    // $compare
+    var_dump(isValid($rule) === $comparison);
 }
