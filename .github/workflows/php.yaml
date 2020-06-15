@@ -1,4 +1,4 @@
-name: PHP Composer
+name: PHP Workflows
 
 on:
   push:
@@ -32,8 +32,20 @@ jobs:
       - name: Execute PHPUnit
         run: vendor/bin/phpunit
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
+      - name: Execute PHP command
+        run: php bin/command
 
-    # - name: Run test suite
-    #   run: composer run-script test
+      # - name: Build image
+      #   run: docker build . --file Dockerfile --tag $IMAGE_NAME
+
+      - name: Push image
+        run: |
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          echo IMAGE_NAME=$IMAGE_NAME
+
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "master" ] && VERSION=latest
+
+          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
