@@ -1,11 +1,15 @@
 version: "3.7"
 
+x-common:
+  &default-common
+  restart: always
+
 services:
-  app_cli:
+  app:
+    <<: *default-common
     build:
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
       context: .
-      target: app
-    restart: on-failure
+    container_name: app
     volumes:
       - .:/usr/src/app:rw,cached

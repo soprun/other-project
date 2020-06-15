@@ -1,0 +1,30 @@
+{
+  "name": "vendor_name/other-project",
+  "description": "description",
+  "minimum-stability": "stable",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "soprun",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "php": "^7.4"
+  },
+  "require-dev": {
+    "ext-xdebug": "*",
+    "phpunit/phpunit": "^9"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "App\\Tests\\": "tests/"
+    }
+  }
+}

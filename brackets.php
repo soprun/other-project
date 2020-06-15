@@ -7,7 +7,6 @@ function isValid(string $input, bool $debug = false): bool
         '{' => '}',
         '[' => ']',
         '(' => ')',
-        '<' => '>',
     ];
 
     $data = str_split($input);

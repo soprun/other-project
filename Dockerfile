@@ -1,4 +1,7 @@
-FROM php:7.4-cli AS app
+FROM php:7.4-fpm
+
+RUN pecl install xdebug-2.8.1 \
+    && docker-php-ext-enable xdebug
 
 # Copy project files to workdir
 COPY . /usr/src/app
@@ -7,11 +10,7 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 
 # Install composer
-# ENV COMPOSER_ALLOW_SUPERUSER=1
-# COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install phpunit
-# RUN curl --location --output /usr/local/bin/phpunit https://phar.phpunit.de/phpunit.phar
-# RUN chmod +x /usr/local/bin/phpunit
-
-CMD ["php", "./brackets.php"]
+CMD ["php-fpm"]
