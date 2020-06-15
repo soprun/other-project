@@ -14,7 +14,7 @@ RUN pecl install xdebug \
   && docker-php-ext-enable xdebug
 
 # use the default production configuration
-# COPY /docker/php/php.ini "$PHP_INI_DIR/php.ini"
+RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 # install composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
