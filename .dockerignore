@@ -1,6 +1,12 @@
-.idea
-
-.gitignore
+.idea/
+.git/
 .DS_Store
-docker-compose.yml
-Dockerfile
+
+# App
+vendor/
+
+# Files
+.gitignore
+.dockerignore
+
+README.md
