@@ -1,9 +1,9 @@
-FROM php:7.4-fpm-alpine
+FROM php:7.4-fpm
 
 # installation system packages
-RUN apk add --no-cache $PHPIZE_DEPS git zip \
-  && pecl install xdebug-2.9.0 \
-  && docker-php-ext-enable xdebug
+#RUN apk add --no-cache $PHPIZE_DEPS git zip \
+#  && pecl install xdebug-2.9.0 \
+#  && docker-php-ext-enable xdebug
 
 # use the default production configuration
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
