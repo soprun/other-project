@@ -15,7 +15,7 @@ final class Bracket
         '(' => ')',
     ];
 
-    public function isValid(string $input): bool
+    public static function isValid(string $input): bool
     {
         if (empty($input) === true) {
             throw new InvalidArgumentException(
@@ -33,7 +33,7 @@ final class Bracket
 
         $stack = new SplStack();
 
-        foreach ($data as $current => $character) {
+        foreach ($data as $character) {
             if (array_key_exists($character, self::$brackets) === true) {
                 $stack->push(self::$brackets[$character]);
                 continue;
@@ -41,13 +41,13 @@ final class Bracket
 
             if ($stack->count() === 0) {
                 throw new RuntimeException(
-                    "An error occurred and the character {$current} requires an open bracket."
+                    "An error occurred and requires an open bracket."
                 );
             }
 
             if ($stack->pop() !== $character) {
                 throw new RuntimeException(
-                    "An error occurred and the character {$current} requires a closed bracket."
+                    "An error occurred and requires a closed bracket."
                 );
             }
         }
@@ -59,15 +59,5 @@ final class Bracket
         }
 
         return true;
-    }
-
-    /**
-     * @param string $input
-     * @return bool
-     * @deprecated
-     */
-    protected static function isOpen(string $input): bool
-    {
-        return array_key_exists($input, self::$brackets) === true;
     }
 }

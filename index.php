@@ -3,15 +3,32 @@ declare(strict_types=1);
 
 use App\Bracket;
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
-//phpinfo();
+$pattern = [
+    '' => false,
+    '{' => false,
+    '}' => false,
+    '}{' => false,
+    '{}' => true,
+    '{{}}' => true,
+    '{()}' => true,
+    '}(){' => false,
+    '{)(}' => false,
+    '{}.' => false,
+    '.{}.' => false,
+    '{()[]<>}' => true,
+    '{()([]<>)}' => true,
+    '{[()([]<>)]}' => false,
+    '{[()([<]<>>)]}' => false,
+];
 
-//$pattern = [
-//    '' => false,
-//    '{}' => true,
-//];
+foreach ($pattern as $rule => $compare) {
+    try {
+        $check = Bracket::isValid($rule);
+    } catch (Throwable $exception) {
+        $check = false;
+    }
 
-$bracket = new Bracket();
-
-var_dump($bracket);
+    var_dump($check === $compare);
+}

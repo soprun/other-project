@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Tests;
 
@@ -9,14 +10,12 @@ use Throwable;
 
 final class BracketTest extends TestCase
 {
-    protected Bracket $instance;
-
     public function testCannotBeEmptyString(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('An error occurred and the string cannot be empty.');
 
-        $this->instance->isValid('');
+        Bracket::isValid('');
     }
 
     public function patternProvider(): array
@@ -37,6 +36,7 @@ final class BracketTest extends TestCase
             ['{{}()[]}', true],
             ['{{}(()[])}', true],
             ['{{}(({)[}])}', false],
+            ['{[()([]<>)]}', false],
         ];
     }
 
@@ -48,20 +48,11 @@ final class BracketTest extends TestCase
     public function testIsValid(string $input, bool $compare): void
     {
         try {
-            $check = $this->instance->isValid($input);
+            $check = Bracket::isValid($input);
         } catch (Throwable $exception) {
             $check = false;
-
-            echo $exception->getMessage();
         }
 
         static::assertSame($check, $compare, $input);
-    }
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->instance = new Bracket(false);
     }
 }
