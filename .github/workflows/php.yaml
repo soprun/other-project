@@ -35,17 +35,17 @@ jobs:
       - name: Execute PHP command
         run: php bin/command
 
-      # - name: Build image
-      #   run: docker build . --file Dockerfile --tag $IMAGE_NAME
-
-      - name: Push image
-        run: |
-          echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
-          echo IMAGE_NAME=$IMAGE_NAME
-
-          # Use Docker `latest` tag convention
-          [ "$VERSION" == "master" ] && VERSION=latest
-
-          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+#      - name: Build image
+#        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+#
+#      - name: Push image
+#        run: |
+#          echo IMAGE_ID=$IMAGE_ID
+#          echo VERSION=$VERSION
+#          echo IMAGE_NAME=$IMAGE_NAME
+#
+#          # Use Docker `latest` tag convention
+#          [ "$VERSION" == "master" ] && VERSION=latest
+#
+#          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+#          docker push $IMAGE_ID:$VERSION
